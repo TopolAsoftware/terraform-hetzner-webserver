@@ -39,7 +39,7 @@ I will deploy the entire system using [Terraform CLI](https://www.terraform.io/d
 
 Clone this repository to your work directory.
 
-`get clone https://github.com/TopolAsoftware/terraform-hetzner-webserver.git`
+`git clone https://github.com/TopolAsoftware/terraform-hetzner-webserver.git`
   
 Edit file terraform.tfvars and add your values.
 
