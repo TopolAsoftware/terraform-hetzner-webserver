@@ -1,0 +1,41 @@
+#cloud-config
+---
+# Create TopolA user
+users:
+    - default
+    - name: ${topola_user}
+      groups: www-data
+      gecos: TopolAms
+      homedir: ${topola_homedir}
+      shell: /bin/bash
+      sudo: ['ALL=(ALL) NOPASSWD:ALL']
+      ssh-authorized-keys: ${topola_public_key}
+
+packages:
+    - apache2
+    - libapache2-mod-auth-tkt
+    - certbot
+    - curl
+    - rsync
+    - jq
+
+package_upgrade: true
+
+# Write info-marker with info about created server
+write_files:
+    - content: |
+        TPA_OWNER=${topola_user}
+        TPA_HOME=${topola_homedir}
+        TPA_DOMAIN=${topola_domain}
+      path: /etc/topola
+      permissions: '0600'
+    - content: |
+        # Letsencrypt acme web-directory
+        Alias /.well-known/ /usr/share/apache2/.well-known/
+        #
+        <Directory /usr/share/apache2/.well-known/>
+             Require all granted
+        </Directory>
+        #
+      path: /etc/apache2/conf-available/web_cert.conf
+      permissions: '0644'
