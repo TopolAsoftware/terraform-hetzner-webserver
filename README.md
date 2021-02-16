@@ -1,4 +1,4 @@
-# TopolA MS application installed at Hetzner Cloud Serve with Terraform
+# TopolA MS application installed at Hetzner Cloud Server with Terraform
 
 ## Goal
 
